@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-xs-12">
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-success" 
+                    [disabled]="!editForm.valid">Save</button>
+                    <button type="button" class="btn btn-danger" (click)="onEditCancel()">Cancel</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control" formControlName="name">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="imgpath">Image URL</label>
+                        <input type="text" id="imgpath" class="form-control" formControlName="imagePath" #imgUrl>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <img *ngIf="imgUrl.value" [src]="imgUrl.value" class="img-responsive">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea type="text" id="description" 
+                        class="form-control" formControlName="description" rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" formArrayName="ings">
+                    <div class="row" *ngFor="let ing of controls; let i=index"
+                     [formGroupName]="i" style="margin-bottom: 10px;">
+                        <div class="col-xs-8" >
+                            <input type="text" class="form-control" formControlName="name">
+                        </div>
+                        <div class="col-xs-2">
+                            <input type="number" class="form-control" formControlName="amount">
+                        </div>
+                        <div class="col-xs-2">
+                            <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">X</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <button type="button" class="btn btn-success" (click)="onAddIngredients()">Add Ingredients</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

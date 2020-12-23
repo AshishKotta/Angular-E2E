@@ -1,0 +1,30 @@
+<ng-template appAlertModalDirective></ng-template>
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <!-- <div class="alert alert-danger" *ngIf="error">
+            <p>{{ error }}</p>
+        </div> -->
+        <!-- <app-alert-modal [message]="error" *ngIf="error" (closeModal)="modalHandle()"></app-alert-modal> -->
+        
+        <div *ngIf="isLoading" style="text-align: center;">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+        <form #authForm="ngForm" (ngSubmit)="onUserAuthenticate(authForm)" *ngIf="!isLoading">
+            <div class="form-group">
+                <label for="email">EMail</label>
+                <input type="email" id="email" class="form-control" 
+                ngModel name="email" required email />
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password</label>
+                <input type="password" id="pwd" class="form-control" ngModel
+                name="pwd" ngModel required minlength="6" />
+            </div>
+            <div>
+                <button class="btn btn-primary" type="submit" [disabled]="!authForm.valid">{{isLoginMode? 'Login' : 'Sign Up'}}</button>
+                <button class="btn btn-primary" type="button" (click)="onSwitchMode()"
+                style="margin-left: 20px;">Switch to {{isLoginMode? 'Sign Up' : 'Login'}}</button>
+            </div>
+        </form>
+    </div>
+</div>
